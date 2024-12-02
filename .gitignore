@@ -1,0 +1,16 @@
+# Compiled files
+/target/
+
+# Rust/Cargo specific files
+**/*.rs.bk
+Cargo.lock
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
