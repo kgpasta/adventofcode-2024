@@ -1,7 +1,5 @@
 pub mod common;
 pub mod day1;
-use crate::day1::day1_part1;
+pub mod day2;
 
-fn main() {
-    day1_part1("sample.txt");
-}
+fn main() {}
