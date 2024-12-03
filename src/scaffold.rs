@@ -19,10 +19,10 @@ pub async fn create_puzzle_files(day: u32) -> Result<(), Box<dyn std::error::Err
         .text()
         .await?;
 
-    let input_path = format!("{}/input.txt", data_dir);
+    let input_path = format!("{}/day{}.txt", data_dir, day);
     fs::write(&input_path, input)?;
 
-    let example_path = format!("{}/example.txt", data_dir);
+    let example_path = format!("{}/sample.txt", data_dir);
     if !Path::new(&example_path).exists() {
         File::create(&example_path)?;
     }
