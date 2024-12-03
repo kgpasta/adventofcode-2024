@@ -28,11 +28,11 @@ pub async fn create_puzzle_files(day: u32) -> Result<(), Box<dyn std::error::Err
     }
 
     let solution_content = format!(
-        r#"pub fn day{}_part1(input: &str) -> i32 {{
+        r#"pub fn day{}_part1(file_name: &str) -> i32 {{
     0 // TODO: Implement solution
 }}
 
-pub fn day{}_part2(input: &str) -> i32 {{
+pub fn day{}_part2(file_name: &str) -> i32 {{
     0 // TODO: Implement solution
 }}
 
@@ -42,29 +42,29 @@ mod tests {{
 
     #[test]
     fn test_day{}_part1_example() {{
-        let input = std::fs::read_to_string("data/day{}/example.txt").unwrap();
-        assert_eq!(day{}_part1(&input), 0);
+        let result = day{}_part1("data/day{}/sample.txt");
+        assert_eq!(result, 0);
     }}
 
     #[test]
     fn test_day{}_part1_input() {{
-        let input = std::fs::read_to_string("data/day{}/input.txt").unwrap();
-        assert_eq!(day{}_part1(&input), 0);
+        let result = day{}_part1("data/day{}/day{}.txt");
+        assert_eq!(result, 0);
     }}
 
     #[test]
     fn test_day{}_part2_example() {{
-        let input = std::fs::read_to_string("data/day{}/example.txt").unwrap();
-        assert_eq!(day{}_part2(&input), 0);
+        let result = day{}_part1("data/day{}/sample.txt");
+        assert_eq!(result, 0);
     }}
 
     #[test]
     fn test_day{}_part2_input() {{
-        let input = std::fs::read_to_string("data/day{}/input.txt").unwrap();
-        assert_eq!(day{}_part2(&input), 0);
+        let result = day{}_part2("data/day{}/day{}.txt");
+        assert_eq!(result, 0);
     }}
 }}"#,
-        day, day, day, day, day, day, day, day, day, day, day, day, day, day
+        day, day, day, day, day, day, day, day, day, day, day, day, day, day, day, day
     );
 
     let solution_path = format!("src/day{}.rs", day);
