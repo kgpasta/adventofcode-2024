@@ -4,7 +4,7 @@ use std::collections::{BinaryHeap, HashMap};
 pub fn day1_part1(file_name: &str) -> i32 {
     let mut heap1 = BinaryHeap::new();
     let mut heap2 = BinaryHeap::new();
-    process_file_by_line(format!("data/day1/{file_name}").as_str())
+    process_file_by_line(file_name)
         .unwrap()
         .for_each(|line| map_line_to_heaps(parse_lines(&line.unwrap()), &mut heap1, &mut heap2));
 
@@ -22,11 +22,9 @@ pub fn day1_part1(file_name: &str) -> i32 {
 pub fn day1_part2(file_name: &str) -> i32 {
     let mut heap1 = BinaryHeap::new();
     let mut hashmap2 = HashMap::new();
-    process_file_by_line(format!("data/day1/{file_name}").as_str())
-        .unwrap()
-        .for_each(|line| {
-            map_line_to_heap_and_hashmap(parse_lines(&line.unwrap()), &mut heap1, &mut hashmap2)
-        });
+    process_file_by_line(file_name).unwrap().for_each(|line| {
+        map_line_to_heap_and_hashmap(parse_lines(&line.unwrap()), &mut heap1, &mut hashmap2)
+    });
 
     let mut total_similarity = 0;
     while !heap1.is_empty() {
@@ -67,25 +65,25 @@ mod tests {
 
     #[test]
     fn test_day1_part1_sample() {
-        let result = day1_part1("sample.txt");
+        let result = day1_part1("data/day1/sample.txt");
         assert_eq!(result, 11);
     }
 
     #[test]
     fn test_day1_part1_real() {
-        let result = day1_part1("day1.txt");
+        let result = day1_part1("data/day1/day1.txt");
         assert_eq!(result, 2066446);
     }
 
     #[test]
     fn test_day1_part2_sample() {
-        let result = day1_part2("sample.txt");
+        let result = day1_part2("data/day1/sample.txt");
         assert_eq!(result, 31);
     }
 
     #[test]
     fn test_day1_part2_real() {
-        let result = day1_part2("day1.txt");
+        let result = day1_part2("data/day1/day1.txt");
         assert_eq!(result, 24931009);
     }
 }

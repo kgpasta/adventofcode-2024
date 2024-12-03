@@ -1,7 +1,7 @@
 use crate::common::process_file_by_line;
 
 pub fn day2_part1(file_name: &str) -> i32 {
-    let lines = process_file_by_line(format!("data/day2/{file_name}").as_str()).unwrap();
+    let lines = process_file_by_line(file_name).unwrap();
 
     let mut valid_lines = 0;
     for line in lines {
@@ -15,7 +15,7 @@ pub fn day2_part1(file_name: &str) -> i32 {
 }
 
 pub fn day2_part2(file_name: &str) -> i32 {
-    let lines = process_file_by_line(format!("data/day2/{file_name}").as_str()).unwrap();
+    let lines = process_file_by_line(file_name).unwrap();
 
     let mut valid_lines = 0;
     for line in lines {
@@ -74,25 +74,25 @@ mod tests {
 
     #[test]
     fn test_day2_part1_sample() {
-        let result = day2_part1("sample.txt");
+        let result = day2_part1("data/day2/sample.txt");
         assert_eq!(result, 2);
     }
 
     #[test]
     fn test_day2_part1_real() {
-        let result = day2_part1("day2.txt");
+        let result = day2_part1("data/day2/day2.txt");
         assert_eq!(result, 100);
     }
 
     #[test]
     fn test_day2_part2_sample() {
-        let result = day2_part2("sample.txt");
+        let result = day2_part2("data/day2/sample.txt");
         assert_eq!(result, 4);
     }
 
     #[test]
     fn test_day2_part2_real() {
-        let result = day2_part2("day2.txt");
+        let result = day2_part2("data/day2/day2.txt");
         assert_eq!(result, 612);
     }
 }

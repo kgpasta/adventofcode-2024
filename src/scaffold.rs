@@ -54,7 +54,7 @@ mod tests {{
 
     #[test]
     fn test_day{}_part2_example() {{
-        let result = day{}_part1("data/day{}/sample.txt");
+        let result = day{}_part2("data/day{}/sample.txt");
         assert_eq!(result, 0);
     }}
 
