@@ -5,3 +5,5 @@ edition = "2021"
 authors = ["Kaustubh"]
 
 [dependencies]
+reqwest = "0.12.9"
+tokio = { version = "*", features = ["rt-multi-thread"] }
