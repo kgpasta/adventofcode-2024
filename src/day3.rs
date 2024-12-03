@@ -28,10 +28,6 @@ pub fn day3_part2(file_name: &str) -> i32 {
         let subtext = &text[index..end_index];
         let count = find_muls(subtext.to_string());
 
-        println!("subtext: {}", subtext);
-        println!("count: {}", count);
-        println!("end_index: {}", end_index);
-
         total_count += count;
 
         if end_index == text.len() {
