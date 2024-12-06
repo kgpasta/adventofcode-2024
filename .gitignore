@@ -16,3 +16,4 @@ Cargo.lock
 Thumbs.db
 
 day*.txt
+.env
