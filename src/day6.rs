@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-use crate::common::{process_file_by_line, read_all_lines};
+use crate::common::process_file_by_line;
 
 pub fn day6_part1(file_name: &str) -> i32 {
     let mut map = construct_map(file_name);
@@ -86,7 +86,60 @@ fn construct_map(file_name: &str) -> Vec<Vec<char>> {
 }
 
 pub fn day6_part2(file_name: &str) -> i32 {
-    0 // TODO: Implement solution
+    let map = construct_map(file_name);
+
+    let guard_position = find_guard_position(&map);
+
+    let mut positions = 0;
+    for x in 0..map.len() {
+        for y in 0..map[x].len() {
+            if guard_position.0 == x as i32 && guard_position.1 == y as i32 {
+                continue;
+            } else if map[x][y] == '#' {
+                continue;
+            }
+
+            let mut clone_map = map.clone();
+            clone_map[x][y] = '#';
+
+            if check_for_cycle(clone_map, guard_position) {
+                positions += 1
+            }
+        }
+    }
+
+    return positions;
+}
+
+fn check_for_cycle(mut map: Vec<Vec<char>>, starting_guard_position: (i32, i32)) -> bool {
+    let mut position_set: HashSet<(i32, i32)> = HashSet::new();
+    let mut guard_position = starting_guard_position.clone();
+    let mut loop_counter = 0;
+
+    while guard_is_on_map(&map, guard_position) {
+        if loop_counter > map.len() * map[0].len() {
+            return true;
+        }
+
+        let (i, j) = guard_position;
+        let (newi, newj, new_orientation) = get_next_position(&map, guard_position);
+        map[i as usize][j as usize] = 'X';
+
+        if position_set.contains(&(i, j)) {
+            loop_counter += 1;
+        } else {
+            loop_counter = 0;
+        }
+
+        position_set.insert((i, j));
+        guard_position = (newi as i32, newj as i32);
+
+        if guard_is_on_map(&map, guard_position) {
+            map[newi as usize][newj as usize] = new_orientation;
+        }
+    }
+
+    return false;
 }
 
 #[cfg(test)]
@@ -108,12 +161,12 @@ mod tests {
     #[test]
     fn test_day6_part2_example() {
         let result = day6_part2("data/day6/sample.txt");
-        assert_eq!(result, 0);
+        assert_eq!(result, 6);
     }
 
     #[test]
     fn test_day6_part2_input() {
         let result = day6_part2("data/day6/day6.txt");
-        assert_eq!(result, 0);
+        assert_eq!(result, 1911);
     }
 }
