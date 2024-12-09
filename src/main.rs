@@ -7,11 +7,12 @@ pub mod day3;
 pub mod day4;
 pub mod day5;
 pub mod day6;
+pub mod day7;
 pub mod scaffold;
 
 fn main() {
     tokio::runtime::Runtime::new().unwrap().block_on(async {
-        create_puzzle_files(6)
+        create_puzzle_files(8)
             .await
             .expect("Failed to create puzzle files");
     });
