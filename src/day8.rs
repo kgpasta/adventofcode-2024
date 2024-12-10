@@ -71,7 +71,64 @@ fn create_antenna_sets(
 }
 
 pub fn day8_part2(file_name: &str) -> i32 {
-    0 // TODO: Implement solution
+    let (antennas, size) = create_antenna_sets(file_name);
+
+    let mut valid_total_antinodes: HashSet<(i32, i32)> = HashSet::new();
+    for (_, locations) in antennas.iter() {
+        let location_list: Vec<_> = locations.iter().collect();
+        for idx1 in 0..locations.len() {
+            for idx2 in idx1 + 1..locations.len() {
+                let (x1, y1) = location_list.get(idx1).unwrap();
+                let (x2, y2) = location_list.get(idx2).unwrap();
+                let (intx1, inty1) = (*x1 as i32, *y1 as i32);
+                let (intx2, inty2) = (*x2 as i32, *y2 as i32);
+                valid_total_antinodes.insert((intx1, inty1));
+                valid_total_antinodes.insert((intx2, inty2));
+
+                let distance_vector = (intx2 - intx1, inty2 - inty1);
+                let mut antinode1 = (
+                    intx1 + distance_vector.0 * -1,
+                    inty1 + distance_vector.1 * -1,
+                );
+
+                let mut antinode2 = (intx2 + distance_vector.0, inty2 + distance_vector.1);
+
+                while is_on_map(antinode1, size) {
+                    valid_total_antinodes.insert(antinode1);
+                    antinode1 = (
+                        antinode1.0 + distance_vector.0 * -1,
+                        antinode1.1 + distance_vector.1 * -1,
+                    );
+                }
+
+                while is_on_map(antinode2, size) {
+                    valid_total_antinodes.insert(antinode2);
+                    antinode2 = (
+                        antinode2.0 + distance_vector.0,
+                        antinode2.1 + distance_vector.1,
+                    );
+                }
+            }
+        }
+    }
+
+    print_map(&valid_total_antinodes, size);
+
+    return valid_total_antinodes.len() as i32;
+}
+
+fn print_map(valid_total_antinodes: &HashSet<(i32, i32)>, size: (usize, usize)) {
+    for y in 0..size.1 {
+        for x in 0..size.0 {
+            if valid_total_antinodes.contains(&(x as i32, y as i32)) {
+                print!("#");
+            } else {
+                print!(".");
+            }
+        }
+        println!();
+    }
+    println!();
 }
 
 #[cfg(test)]
@@ -87,18 +144,18 @@ mod tests {
     #[test]
     fn test_day8_part1_input() {
         let result = day8_part1("data/day8/day8.txt");
-        assert_eq!(result, 0);
+        assert_eq!(result, 278);
     }
 
     #[test]
     fn test_day8_part2_example() {
         let result = day8_part2("data/day8/sample.txt");
-        assert_eq!(result, 0);
+        assert_eq!(result, 34);
     }
 
     #[test]
     fn test_day8_part2_input() {
         let result = day8_part2("data/day8/day8.txt");
-        assert_eq!(result, 0);
+        assert_eq!(result, 1067);
     }
 }
