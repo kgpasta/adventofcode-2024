@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 use std::collections::HashSet;
 
+use crate::common::is_on_map;
 use crate::common::process_file_by_line;
 
 pub fn day8_part1(file_name: &str) -> i32 {
@@ -35,10 +36,6 @@ pub fn day8_part1(file_name: &str) -> i32 {
     }
 
     return valid_total_antinodes.len() as i32;
-}
-
-fn is_on_map((x, y): (i32, i32), (x_max, y_max): (usize, usize)) -> bool {
-    return x >= 0 && x <= x_max as i32 && y >= 0 && y <= y_max as i32;
 }
 
 fn create_antenna_sets(

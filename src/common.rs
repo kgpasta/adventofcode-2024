@@ -19,3 +19,7 @@ pub fn read_all_lines(filename: &str) -> io::Result<Vec<String>> {
 
     return Ok(reader.lines().map(|x| x.unwrap()).collect());
 }
+
+pub fn is_on_map((x, y): (i32, i32), (x_max, y_max): (usize, usize)) -> bool {
+    return x >= 0 && x <= x_max as i32 && y >= 0 && y <= y_max as i32;
+}
