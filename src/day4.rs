@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-use crate::common::read_all_lines;
+use crate::common::{create_grid, read_all_lines};
 
 pub fn day4_part1(file_name: &str) -> i32 {
     let grid = create_grid(read_all_lines(file_name).unwrap());
@@ -96,18 +96,6 @@ fn try_all_directions(grid: &Vec<Vec<char>>, i: usize, j: usize) -> (i32, HashSe
 
 fn is_out_of_bounds(grid: &Vec<Vec<char>>, i: i32, j: i32) -> bool {
     i < 0 || i >= grid.len() as i32 || j < 0 || j >= grid[i as usize].len() as i32
-}
-
-fn create_grid(lines: Vec<String>) -> Vec<Vec<char>> {
-    let mut grid = vec![];
-    for line in lines {
-        let mut row = vec![];
-        for c in line.chars() {
-            row.push(c);
-        }
-        grid.push(row);
-    }
-    grid
 }
 
 pub fn day4_part2(file_name: &str) -> i32 {

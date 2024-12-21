@@ -9,7 +9,7 @@ pub fn day11_part1(file_name: &str) -> i64 {
     let mut stones = read_stones(file_name);
     let mut cached_values: HashMap<i64, (i64, i64)> = HashMap::new();
 
-    for i in 0..BLINKS_ONE {
+    for _i in 0..BLINKS_ONE {
         let new_stones = split_stones(&stones, &mut cached_values);
 
         stones = new_stones;

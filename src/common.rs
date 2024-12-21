@@ -20,6 +20,18 @@ pub fn read_all_lines(filename: &str) -> io::Result<Vec<String>> {
     return Ok(reader.lines().map(|x| x.unwrap()).collect());
 }
 
+pub fn create_grid(lines: Vec<String>) -> Vec<Vec<char>> {
+    let mut grid = vec![];
+    for line in lines {
+        let mut row = vec![];
+        for c in line.chars() {
+            row.push(c);
+        }
+        grid.push(row);
+    }
+    grid
+}
+
 pub fn is_on_map((x, y): (i32, i32), (x_max, y_max): (usize, usize)) -> bool {
     return x >= 0 && x <= x_max as i32 && y >= 0 && y <= y_max as i32;
 }
