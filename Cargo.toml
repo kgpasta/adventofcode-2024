@@ -7,4 +7,5 @@ authors = ["Kaustubh"]
 [dependencies]
 regex = "1.11.1"
 reqwest = "0.12.9"
+nalgebra = "0.29.0"
 tokio = { version = "*", features = ["rt-multi-thread"] }
